@@ -1,3 +1,4 @@
+from pydxs.bands import determine_band
 
 class Spot():
     """This class can read the format used by most amateur radio spotting systems. It is specifically
@@ -21,3 +22,18 @@ class Spot():
         self.time = self._report[70:75].strip()
         self.reporting_station_location = self._report[76:78].strip()
         self.raw = self._report.strip()
+
+    def get_band(self):
+        if self.raw:
+            return determine_band(self.frequency)
+        return ''
+    band = property(get_band, None, None, None)
+
+    def __unicode__(self):
+        return self.raw
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __repr__(self):
+        return self.__unicode__()

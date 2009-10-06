@@ -1,4 +1,5 @@
 from django.test import TestCase
+from pydxs.bands import determine_band
 from pydxs.spotting import Spot
 
 class ParsingTest(TestCase):
@@ -43,3 +44,43 @@ class ParsingTest(TestCase):
         self.failUnlessEqual(spot.heard_station, 'XE1TNC')
         self.failUnlessEqual(spot.comments, '15 dB  26 WPM  DE')
         self.failUnlessEqual(spot.time, '1940Z')
+
+class BandDeterminationTest(TestCase):
+    def test_160m(self):
+        self.failUnlessEqual(determine_band('1823.7'), '160m')
+
+    def test_80m(self):
+        self.failUnlessEqual(determine_band('3797.0'), '80m')
+
+    def test_40m(self):
+        self.failUnlessEqual(determine_band('7157.7'), '40m')
+
+    def test_30m(self):
+        self.failUnlessEqual(determine_band('10107.0'), '30m')
+
+    def test_20m(self):
+        self.failUnlessEqual(determine_band('14008.1'), '20m')
+
+    def test_17m(self):
+        self.failUnlessEqual(determine_band('18085.1'), '17m')
+
+    def test_15m(self):
+        self.failUnlessEqual(determine_band('21005.0'), '15m')
+
+    def test_12m(self):
+        self.failUnlessEqual(determine_band('24950.1'), '12m')
+
+    def test_10m(self):
+        self.failUnlessEqual(determine_band('28350.0'), '10m')
+
+    def test_6m(self):
+        self.failUnlessEqual(determine_band('50130.0'), '6m')
+
+    def test_2m(self):
+        self.failUnlessEqual(determine_band('145920.0'), '2m')
+
+    def test_70cm(self):
+        self.failUnlessEqual(determine_band('432270.0'), '70cm')
+
+    def test_public_safety(self):
+        self.failUnlessEqual(determine_band('165750.0'), '?')
