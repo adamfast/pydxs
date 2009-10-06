@@ -13,15 +13,40 @@ class Spot():
             self.make_report()
 
     def make_report(self):
-        self.preamble = self._report[0:6].strip()
-        self.reporting_station = self._report[6:17].replace(':', '').strip()
-        self.frequency = self._report[17:25].strip()
-        self.heard_station = self._report[26:39].strip()
-        self.comments = self._report[39:65].strip()
         self.heard_station_location = self._report[66:69].strip()
         self.time = self._report[70:75].strip()
         self.reporting_station_location = self._report[76:78].strip()
         self.raw = self._report.strip()
+
+    def get_preamble(self):
+        if self._report:
+            return self._report[0:6].strip()
+        return ''
+    preamble = property(get_preamble, None, None, None)
+
+    def get_reporting_station(self):
+        if self._report:
+            return self._report[6:17].replace(':', '').strip()
+        return ''
+    reporting_station = property(get_preamble, None, None, None)
+
+    def get_frequency(self):
+        if self._report:
+            return self._report[17:25].strip()
+        return ''
+    frequency = property(get_frequency, None, None, None)
+
+    def get_heard_station(self):
+        if self._report:
+            return self._report[26:39].strip()
+        return ''
+    heard_station = property(get_heard_station, None, None, None)
+
+    def get_comments(self):
+        if self._report:
+            return self._report[39:65].strip()
+        return ''
+    get_comments = property(self._report[39:65].strip(), None, None, None)
 
     def get_band(self):
         if self.raw:
