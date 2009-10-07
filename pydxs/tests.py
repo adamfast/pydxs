@@ -47,8 +47,8 @@ class ParsingTest(TestCase):
 
     def test_blank(self):
         spot = Spot()
-        self.failUnlessEqual(len(spot.raw), 1)
-        self.failUnlessEqual(spot.raw, '                                                                           ')
+        self.failUnlessEqual(len(spot.raw), 75)
+        self.failUnlessEqual(spot.raw, 'DX                                                                 0000Z   ')
 
 class BandDeterminationTest(TestCase):
     def test_160m(self):

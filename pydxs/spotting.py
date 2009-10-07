@@ -8,14 +8,10 @@ class Spot():
     properly please send them my way to look at."""
 
     def __init__(self, report=""):
-        if report:
+        if report != "":
             self._report = report
         else:
-            self._report = ''.ljust(80)
-
-    def make_report(self):
-        self.reporting_station_location = self._report[76:78].strip()
-        self.raw = self._report.strip()
+            self._report = 'DX                                                                 0000Z   '
 
     def get_preamble(self):
         if self._report:
@@ -27,7 +23,7 @@ class Spot():
         if self._report:
             return self._report[6:17].replace(':', '').strip()
         return ''
-    reporting_station = property(get_preamble, None, None, None)
+    reporting_station = property(get_reporting_station, None, None, None)
 
     def get_frequency(self):
         if self._report:
@@ -58,6 +54,18 @@ class Spot():
             return self._report[70:75].strip()
         return ''
     time = property(get_time, None, None, None)
+
+    def get_reporting_station_location(self):
+        if self._report:
+            return self._report[76:78].strip()
+        return ''
+    reporting_station_location = property(get_reporting_station_location, None, None, None)
+
+    def get_raw(self):
+        if self._report:
+            return self._report
+        return ''
+    raw = property(get_raw, None, None, None)
 
     def get_band(self):
         if self.raw:
