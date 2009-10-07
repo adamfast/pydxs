@@ -10,11 +10,10 @@ class Spot():
     def __init__(self, report=""):
         if report:
             self._report = report
-            self.make_report()
+        else:
+            self._report = ''.ljust(80)
 
     def make_report(self):
-        self.heard_station_location = self._report[66:69].strip()
-        self.time = self._report[70:75].strip()
         self.reporting_station_location = self._report[76:78].strip()
         self.raw = self._report.strip()
 
@@ -46,7 +45,19 @@ class Spot():
         if self._report:
             return self._report[39:65].strip()
         return ''
-    get_comments = property(self._report[39:65].strip(), None, None, None)
+    comments = property(get_comments, None, None, None)
+
+    def get_heard_station_location(self):
+        if self._report:
+            return self._report[66:69].strip()
+        return ''
+    heard_station_location = property(get_heard_station_location, None, None, None)
+
+    def get_time(self):
+        if self._report:
+            return self._report[70:75].strip()
+        return ''
+    time = property(get_time, None, None, None)
 
     def get_band(self):
         if self.raw:

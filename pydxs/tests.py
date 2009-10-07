@@ -45,6 +45,11 @@ class ParsingTest(TestCase):
         self.failUnlessEqual(spot.comments, '15 dB  26 WPM  DE')
         self.failUnlessEqual(spot.time, '1940Z')
 
+    def test_blank(self):
+        spot = Spot()
+        self.failUnlessEqual(len(spot.raw), 1)
+        self.failUnlessEqual(spot.raw, '                                                                           ')
+
 class BandDeterminationTest(TestCase):
     def test_160m(self):
         self.failUnlessEqual(determine_band('1823.7'), '160m')
