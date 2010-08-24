@@ -1,0 +1,3 @@
+This library parses and allows object-like access to the format used for amateur radio spotting networks. Combined with a simple telnet listener and a data store of some type you can store every spot coming through for analysis.
+
+Will also eventually get the ability to output the DX spotting format, so if you're wanting to share info from your own database to the spotting network you can properly format the submission.
