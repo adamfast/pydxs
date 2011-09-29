@@ -1,6 +1,6 @@
 from pydxs.bands import determine_band
 
-class Spot():
+class Spot(object):
     """This class can read the format used by most amateur radio spotting systems. It is specifically
     designed for the output used by CW Skimmer and read by the N3FJP logging software. It's my
     understanding that's a standard format, but I don't have any documentation on its' implementation
