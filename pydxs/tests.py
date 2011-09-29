@@ -45,6 +45,27 @@ class ParsingTest(TestCase):
         self.failUnlessEqual(spot.comments, '15 dB  26 WPM  DE')
         self.failUnlessEqual(spot.time, '1940Z')
 
+    def test_assigned_callsign(self):
+        spot = Spot()
+        spot.heard_station = 'KC0YLK'
+        self.failUnlessEqual(len(spot.raw), 76)
+        self.failUnlessEqual(spot.raw, 'DX                        KC0YLK                                      0000Z\n')
+
+    def test_assigned_frequency(self):
+        spot = Spot()
+        spot.frequency = '14023.5'
+        self.failUnlessEqual(len(spot.raw), 76)
+        self.failUnlessEqual(spot.raw, 'DX               14023.5                                              0000Z\n')
+
+    def test_assigned_comments(self):
+        spot = Spot()
+        spot.comments = 'mult scla loud'
+        self.failUnlessEqual(len(spot.raw), 76)
+        self.failUnlessEqual(spot.raw, 'DX                                       mult scla loud               0000Z\n')
+#                                      'DX de K5QQ-#:    14015.1  G4FYF           7 dB  16 WPM  DE            1940Z\n'
+#                                      'DX de K5QQ-#:    14022.3  XE1TNC         15 dB  26 WPM  DE            1940Z\n'
+#                                      'DX                                                                    0000Z\n'
+
     def test_blank(self):
         spot = Spot()
         self.failUnlessEqual(len(spot.raw), 76)

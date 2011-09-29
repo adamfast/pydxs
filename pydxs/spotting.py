@@ -29,19 +29,28 @@ class Spot(object):
         if self._report:
             return self._report[17:25].strip()
         return ''
-    frequency = property(get_frequency, None, None, None)
+
+    def set_frequency(self, value):
+        self._report = self._report[:17] + value.ljust(8) + self._report[25:]
+    frequency = property(get_frequency, set_frequency, None, None)
 
     def get_heard_station(self):
         if self._report:
             return self._report[26:39].strip()
         return ''
-    heard_station = property(get_heard_station, None, None, None)
+
+    def set_heard_station(self, value):
+        self._report = self._report[:26] + value.ljust(13) + self._report[39:]
+    heard_station = property(get_heard_station, set_heard_station, None, None)
 
     def get_comments(self):
         if self._report:
             return self._report[39:65].strip()
         return ''
-    comments = property(get_comments, None, None, None)
+
+    def set_comments(self, value):
+        self._report = self._report[:41] + value.ljust(24) + self._report[65:]
+    comments = property(get_comments, set_comments, None, None)
 
     def get_heard_station_location(self):
         if self._report:
