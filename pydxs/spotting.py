@@ -11,7 +11,7 @@ class Spot(object):
         if report != "":
             self._report = report
         else:
-            self._report = 'DX                                                                 0000Z   '
+            self._report = 'DX                                                                    0000Z\n'
 
     def get_preamble(self):
         if self._report:
